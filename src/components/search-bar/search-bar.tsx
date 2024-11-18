@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { InputGroup } from '@blueprintjs/core';
 import {setFilter} from "../../store/actions-slice.ts";
+import s from './search-bar.module.css'
 
 const SearchBar: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const SearchBar: React.FC = () => {
     <InputGroup
       placeholder="Поиск"
       onChange={handleSearchChange}
+      className={s.searchBar}
     />
   );
 };

@@ -1,28 +1,23 @@
-import React, {useState} from 'react';
-import { useSelector } from 'react-redux';
-import { Column, Cell, Table2} from '@blueprintjs/table';
-import {selectActions, selectFilter} from "../store/selectors.ts";
+import {useState} from 'react';
+import {useSelector} from 'react-redux';
+import {Column, Cell, Table2} from '@blueprintjs/table';
+import {selectActions, selectFilter} from "../../store/selectors.ts";
 import "@blueprintjs/table/lib/css/table.css";
-import Pagination from "./pagination/pagination.tsx";
+import Pagination from "../pagination/pagination.tsx";
+import {ROWS_PER_PAGE} from "../../consts.ts";
 
-const ROWS_PER_PAGE = 10; // Количество строк на странице
-
-const ActionTable: React.FC = () => {
+const ActionTable = () => {
   const actions = useSelector(selectActions);
   const filter = useSelector(selectFilter);
   const [currentPage, setCurrentPage] = useState(1);
-
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-
   const filteredActions = actions.filter((action) => {
-    console.log(Object.values(action).join('').includes(filter))
-    return Object.values(action).join('').includes(filter)
-  }
-
+      return Object.values(action).join('').includes(filter)
+    }
   );
 
   const totalPages = Math.ceil(filteredActions.length / ROWS_PER_PAGE);
